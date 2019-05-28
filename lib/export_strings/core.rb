@@ -5,9 +5,7 @@ module ExportStrings
     class << self
       def execute(rb_text)
         @str_nodes = []
-        pp Ripper.sexp(rb_text)
         recursively_push_str_nodes Ripper.sexp(rb_text)
-        pp @str_nodes
         to_strings @str_nodes
       end
 
@@ -24,21 +22,21 @@ module ExportStrings
       end
 
       def to_strings(nodes)
-        nodes.map { |node| str_content_node2str node }
+        nodes.map do |node|
+          @string = ''
+          str_content_node2str node
+        end
       end
 
-      def str_content_node2str
-        str_content_node2str.reduce('') do |acc, leaf|
-          str = case leaf[0]
-                when :@tstring_content
-                  leaf[1]
-                when :string_embexpr
-                  leaf[1][0][1][1]
-                else
-                  raise Error
-                end
-          acc + str
+      def str_content_node2str(string_content_node)
+        string_content_node.each do |leaf|
+          if leaf.class == Array && leaf[0] == :@tstring_content
+            @string << leaf[1]
+          elsif leaf.class == Array
+            str_content_node2str(leaf)
+          end
         end
+        @string
       end
     end
   end
