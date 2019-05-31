@@ -1,7 +1,7 @@
 require 'ripper'
 
 module ExportStrings
-  # 文字列展開ムツカシイ、、、
+  # 文字列展開は含めない
   class BySexp
     class << self
       def execute(rb_text)
@@ -35,19 +35,11 @@ module ExportStrings
           if leaf.class == Array && leaf[0] == :@tstring_content
             # 通常のstringが格納される時
             str << leaf[1]
-          elsif leaf.class == Array && leaf[0] == :@string_embexpr
-            # 文字列展開の時
-            str << str_embexpr2str(leaf[1])
           elsif leaf.class == Array
             str_content_node2str(leaf, str)
           end
         end
         str
-      end
-
-      # string_embexprをstringに変換する
-      def str_embexpr2str(string_embexpr_node)
-        # pending
       end
     end
   end

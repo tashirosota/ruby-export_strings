@@ -26,7 +26,6 @@ ExportStrings.execute rb_file_path
 => [String, String, String, String]
 ```
 
-
 ## Example
 
 ```rb
@@ -43,8 +42,17 @@ class Example
   def str2
     "I like gohan. Do you like gohan.Oh Yeah."
   end
+
+  def str3
+    "#{hoge} #{hoge} #{hoge}"
+  end
+
+  def hoge
+    'hoge'
+  end
 end
 
+# 修正入れる
 # =======your irb console=======
 require 'export_strings'
 

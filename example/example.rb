@@ -58,3 +58,16 @@ a      asdfasdfasdfasdfsh
     'single_quot_str'
   end
 end
+
+class Example2
+  def hogeo2
+    'test'
+    "test"
+    'test' + "test"
+    'test' << 'test'
+  end
+
+  def test2
+    'hi'
+  end
+end
