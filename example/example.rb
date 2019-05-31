@@ -1,4 +1,5 @@
 class Example
+  @pokemon = 'pokemon'
 
   def str
     <<-SQL
@@ -35,6 +36,9 @@ a      asdfasdfasdfasdfsh
     GROUP BY gender
     HAVING 100 > Max(#{hogeo})
     AND HAVING 1000 < Max(#{test})
+    AND HAVING 1000 < Max(#{String.new})
+    AND HAVING 1000 < Max(#{test; test})
+    AND HAVING 1000 < Max(#{@pokemon})
     #{!!test ? 'page' : 'hoge'}
     "
   end
@@ -53,5 +57,4 @@ a      asdfasdfasdfasdfsh
   def single_auot
     'single_quot_str'
   end
-
 end
