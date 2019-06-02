@@ -5,7 +5,6 @@ module ExportStrings
   class BySexp
     class << self
       def execute(rb_text)
-        pp Ripper.sexp(rb_text)
         str_content_nodes = recursively_push_for_str_content_nodes Ripper.sexp(rb_text), []
         content_nodes2str_ary str_content_nodes
       end

@@ -44,25 +44,34 @@ class Example
   end
 
   def str3
-    "#{hoge} #{hoge} #{hoge}"
+    "#{hello} Mikel"
   end
 
-  def hoge
-    'hoge'
+  def hello
+    'hello world'
   end
 end
 
-# 修正入れる
 # =======your irb console=======
 require 'export_strings'
 
 pp ExportStrings.execute 'example.rb'
 
 ["      SELECT *\n" + "      FROM users\n" + "      WHERE id > 100\n",
- "I like gohan. Do you like gohan.Oh Yeah."]
+ "I like gohan. Do you like gohan.Oh Yeah.",
+ "\#{hello} Mikel",
+ "hello world"]
 
-=> ["      SELECT *\n      FROM users\n      WHERE id > 100\n", "I like gohan. Do you like gohan.Oh Yeah."]
+=> ["SELECT *\n      FROM users\n      WHERE id > 100\n", "I like gohan. Do you like gohan.Oh Yeah.", "\#{hello} Mikel", "hello world"]
 
+pp ExportStrings.execute 'example.rb', with_embexpr: false
+
+["      SELECT *\n" + "      FROM users\n" + "      WHERE id > 100\n",
+ "I like gohan. Do you like gohan.Oh Yeah.",
+ " Mikel",
+ "hello world"]
+
+=> ["SELECT *\n      FROM users\n      WHERE id > 100\n", "I like gohan. Do you like gohan.Oh Yeah.", " Mikel", "hello world"]
 ```
 
 ## Schedule
@@ -70,8 +79,8 @@ pp ExportStrings.execute 'example.rb'
 ### I want to develop this to make gem of format or parce.
 
  - Implement to export from singleton_method
- - Implement to export from string interpolation
- - Implement to export from `hoge ? 'page' : 'peke'`
+ - ~~Implement to export from string interpolation~~ fix
+ - ~~Implement to export from `hoge ? 'page' : 'peke'`~~ fix
 
 ## Contributing
 

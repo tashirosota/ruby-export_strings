@@ -39,7 +39,7 @@ a      asdfasdfasdfasdfsh
     AND HAVING 1000 < Max(#{String.new})
     AND HAVING 1000 < Max(#{test; test})
     AND HAVING 1000 < Max(#{@pokemon})
-    #{!!test ? 'page' : 'hoge'}
+    #{!!test ? 'hogeo' : 'hoge'}
     "
   end
 
@@ -69,5 +69,27 @@ class Example2
 
   def test2
     'hi'
+  end
+end
+
+class Example
+  def str1
+    <<-SQL
+      SELECT *
+      FROM users
+      WHERE id > 100
+    SQL
+  end
+
+  def str2
+    "I like gohan. Do you like gohan.Oh Yeah."
+  end
+
+  def str3
+    "#{hello} Mikel"
+  end
+
+  def hello
+    'hello world'
   end
 end
